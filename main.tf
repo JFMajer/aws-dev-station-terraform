@@ -89,4 +89,13 @@ resource "aws_instance" "dev_station" {
   tags = {
     Name = "${var.name_prefix}-ec2"
   }
+
+  provisioner "local-exec" {
+    command = templatefile("${var.host_os}-ssh-config.tpl", {
+      hostname      = self.public_ip,
+      username      = "ubuntu",
+      identity_file = var.station_private_key_path
+    })
+    interpreter = var.host_os == "linux" ? ["bash", "-c"] : ["powershell", "-Command"]
+  }
 }

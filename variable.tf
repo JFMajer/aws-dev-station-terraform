@@ -28,6 +28,12 @@ variable "root_volume_size" {
   default = "10"
 }
 
+variable "host_os" {
+  type    = string
+  default = "linux"
+}
+
 
 variable "home_ip" {}
 variable "station_public_key_path" {}
+variable "station_private_key_path" {}
